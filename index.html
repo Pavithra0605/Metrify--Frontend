@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>METRIFY — Smart Digital Verification Platform for Measuring Instruments</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-icon">M</div>
+                <h2>METRIFY</h2>
+            </div>
+            <p class="sidebar-subtitle">Smart Calibration & Verification</p>
+
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" data-target="dashboard-section">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <rect width="7" height="9" x="3" y="3" rx="1" />
+                        <rect width="7" height="5" x="14" y="3" rx="1" />
+                        <rect width="7" height="9" x="14" y="12" rx="1" />
+                        <rect width="7" height="5" x="3" y="16" rx="1" />
+                    </svg>
+                    Dashboard
+                </a>
+                <a href="#" class="nav-item" data-target="registry-section">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-0-5H20" />
+                    </svg>
+                    Instrument Registry
+                </a>
+                <a href="#" class="nav-item" data-target="register-section">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path d="M12 5v14M5 12h14" />
+                    </svg>
+                    Register Instrument
+                </a>
+                <a href="#" class="nav-item" data-target="verify-section">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <circle cx="11" cy="11" r="8" />
+                        <path d="m21 21-4.3-4.3" />
+                    </svg>
+                    Verify Instrument
+                </a>
+                <a href="#" class="nav-item" data-target="inspection-section">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+                        <rect width="8" height="4" x="8" y="2" rx="1" ry="1" />
+                        <path d="M9 14h6M9 10h6M9 18h6" />
+                    </svg>
+                    Inspections & History
+                </a>
+                <a href="#" class="nav-item" data-target="about-section">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="10" />
+                        <path d="M12 16v-4M12 8h.01" />
+                    </svg>
+                    About METRIFY
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="prototype-badge">
+                    <span>College Project Demo</span>
+                    <small>Academic Prototype v1.0</small>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Top Header Bar -->
+            <header class="top-header">
+                <div class="header-search">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <circle cx="11" cy="11" r="8" />
+                        <path d="m21 21-4.3-4.3" />
+                    </svg>
+                    <input type="text" id="global-search-input" placeholder="Quick search instruments, IDs, owners...">
+                </div>
+                <div class="header-actions">
+                    <button id="theme-toggle" class="icon-btn" title="Toggle Light/Dark Mode">
+                        <svg class="sun-icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                            viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="4" />
+                            <path
+                                d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+                        </svg>
+                        <svg class="moon-icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                            viewBox="0 0 24 24">
+                            <path d="M12 3a6.4 6.4 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+                        </svg>
+                    </button>
+                    <div class="user-profile">
+                        <div class="avatar">QA</div>
+                        <div class="user-info">
+                            <span class="user-name">Metrology Inspector</span>
+                            <span class="user-role">Academic Prototype</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dynamic Notification Toast Container -->
+            <div id="toast-container"></div>
+
+            <!-- SECTION 1: DASHBOARD -->
+            <section id="dashboard-section" class="content-section active">
+                <div class="section-header">
+                    <div>
+                        <h1>METRIFY Dashboard</h1>
+                        <p>Real-time metrics, calibration due alerts, and instrument compliance monitoring.</p>
+                    </div>
+                    <div class="header-buttons">
+                        <button class="btn btn-outline" onclick="switchSection('register-section')">+ Register
+                            Instrument</button>
+                        <button class="btn btn-primary" onclick="switchSection('verify-section')">Verify via ID</button>
+                    </div>
+                </div>
+
+                <!-- 1. STATISTIC CARDS -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon blue">
+                            <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"
+                                viewBox="0 0 24 24">
+                                <rect width="7" height="9" x="3" y="3" rx="1" />
+                                <rect width="7" height="5" x="14" y="3" rx="1" />
+                                <rect width="7" height="9" x="14" y="12" rx="1" />
+                                <rect width="7" height="5" x="3" y="16" rx="1" />
+                            </svg>
+                        </div>
+                        <div class="stat-details">
+                            <span class="stat-label">Total Instruments</span>
+                            <h2 id="stat-total">0</h2>
+                            <span class="stat-trend positive">Active in Registry</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon green">
+                            <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"
+                                viewBox="0 0 24 24">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                                <path d="m9 11 3 3L22 4" />
+                            </svg>
+                        </div>
+                        <div class="stat-details">
+                            <span class="stat-label">Verified / Valid</span>
+                            <h2 id="stat-verified">0</h2>
+                            <span class="stat-trend positive">Calibrated & Compliant</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon orange">
+                            <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"
+                                viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="10" />
+                                <path d="M12 8v4l3 3" />
+                            </svg>
+                        </div>
+                        <div class="stat-details">
+                            <span class="stat-label">Pending Inspection</span>
+                            <h2 id="stat-pending">0</h2>
+                            <span class="stat-trend neutral">Awaiting Audit</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon red">
+                            <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"
+                                viewBox="0 0 24 24">
+                                <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z" />
+                                <path d="M12 9v4" />
+                                <path d="M12 17h.01" />
+                            </svg>
+                        </div>
+                        <div class="stat-details">
+                            <span class="stat-label">Expired Calibration</span>
+                            <h2 id="stat-expired">0</h2>
+                            <span class="stat-trend negative">Requires Recalibration</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. CALIBRATION / VERIFICATION DUE ALERTS BANNER -->
+                <div id="due-alerts-banner" class="due-alerts-banner hidden">
+                    <div class="alert-banner-content">
+                        <div class="alert-banner-icon">⚠️</div>
+                        <div>
+                            <h4 id="alert-banner-title">Calibration Due / Overdue Notice</h4>
+                            <p id="alert-banner-desc">There are measuring instruments requiring immediate attention.</p>
+                        </div>
+                    </div>
+                    <button class="btn btn-sm btn-outline-danger" type="button" onclick="openAlertsModal()">View Alerts
+                        List (<span id="alert-count-badge">0</span>)</button>
+                </div>
+
+                <!-- 3. RECENT INSTRUMENT REGISTRATIONS TABLE -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Recent Instrument Registrations (Demo Data)</h3>
+                        <button class="text-btn" type="button" onclick="switchSection('registry-section')">View Full
+                            Registry →</button>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="data-table" id="recent-instruments-table">
+                            <thead>
+                                <tr>
+                                    <th>Instrument ID</th>
+                                    <th>Instrument Name / Type</th>
+                                    <th>Owner</th>
+                                    <th>Last Verification</th>
+                                    <th>Next Due Date</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 4. SELECTED INSTRUMENT VERIFICATION HISTORY TIMELINE -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Instrument Inspection & Audit Timeline</h3>
+                        <div class="inline-select-group">
+                            <select id="timeline-instrument-select" onchange="renderTimelineForSelected(this.value)">
+                                <option value="">Select instrument to view history...</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="timeline-container" class="timeline-container">
+                        <div class="empty-state">Select an instrument above to inspect its audit trail and inspection
+                            history logs.</div>
+                    </div>
+                </div>
+
+                <!-- 5. QUICK ACTION CARDS & 6. ANALYTICS & REPORTS SUMMARY -->
+                <div class="dashboard-bottom-grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Quick Actions</h3>
+                        </div>
+                        <div class="quick-actions-grid">
+                            <div class="quick-action-tile" onclick="switchSection('registry-section')">
+                                <div class="qa-icon">📋</div>
+                                <div>
+                                    <h4>Instrument Registry</h4>
+                                    <p>Search & filter records</p>
+                                </div>
+                            </div>
+                            <div class="quick-action-tile" onclick="openAlertsModal()">
+                                <div class="qa-icon">⏰</div>
+                                <div>
+                                    <h4>Due Alerts</h4>
+                                    <p>Review upcoming expirations</p>
+                                </div>
+                            </div>
+                            <div class="quick-action-tile" onclick="switchSection('verify-section')">
+                                <div class="qa-icon">🔍</div>
+                                <div>
+                                    <h4>Verification History</h4>
+                                    <p>Lookup audit trails</p>
+                                </div>
+                            </div>
+                            <div class="quick-action-tile" onclick="exportCSVData()">
+                                <div class="qa-icon">📊</div>
+                                <div>
+                                    <h4>Analytics & Reports</h4>
+                                    <p>Export CSV data report</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Compliance Summary & Reports</h3>
+                            <button class="btn btn-sm btn-outline" type="button" onclick="exportCSVData()">Export
+                                CSV</button>
+                        </div>
+                        <div class="analytics-summary-box">
+                            <div class="summary-row">
+                                <span>Total Tracked Devices</span>
+                                <strong id="summary-total">0</strong>
+                            </div>
+                            <div class="summary-row">
+                                <span>Compliance Rate</span>
+                                <strong id="summary-compliance">0%</strong>
+                            </div>
+                            <div class="summary-row">
+                                <span>Active Inspection Logs</span>
+                                <strong id="summary-logs">0</strong>
+                            </div>
+                            <div class="summary-row">
+                                <span>Storage Mode</span>
+                                <span class="badge verified">Browser LocalStorage</span>
+                            </div>
+                        </div>
+                        <div class="disclaimer-mini" style="margin-top: 16px;">
+                            <p>🎓 Academic prototype only — not an official government certification service.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 2: INSTRUMENT REGISTRY -->
+            <section id="registry-section" class="content-section">
+                <div class="section-header">
+                    <div>
+                        <h1>Instrument Registry</h1>
+                        <p>Complete searchable directory of all registered measuring devices.</p>
+                    </div>
+                    <div class="header-buttons">
+                        <button class="btn btn-outline" type="button" onclick="exportCSVData()">Export CSV</button>
+                        <button class="btn btn-primary" type="button" onclick="switchSection('register-section')">+
+                            Register New</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="filter-toolbar">
+                        <div class="search-box">
+                            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                                viewBox="0 0 24 24">
+                                <circle cx="11" cy="11" r="8" />
+                                <path d="m21 21-4.3-4.3" />
+                            </svg>
+                            <input type="text" id="registry-search" placeholder="Filter by ID, name, owner, type...">
+                        </div>
+                        <div class="filter-selects">
+                            <select id="status-filter">
+                                <option value="">All Statuses</option>
+                                <option value="Verified">Verified</option>
+                                <option value="Pending">Pending</option>
+                                <option value="Expired">Expired</option>
+                            </select>
+                            <button class="btn btn-outline" type="button"
+                                onclick="resetRegistryFilters()">Reset</button>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="data-table" id="full-registry-table">
+                            <thead>
+                                <tr>
+                                    <th>Instrument ID</th>
+                                    <th>Instrument Name / Type</th>
+                                    <th>Owner</th>
+                                    <th>Last Verification</th>
+                                    <th>Next Due Date</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 3: REGISTER INSTRUMENT -->
+            <section id="register-section" class="content-section">
+                <div class="section-header">
+                    <div>
+                        <h1>Register Measuring Instrument</h1>
+                        <p>Add a new device to the METRIFY verification network.</p>
+                    </div>
+                </div>
+
+                <div class="card max-w-800">
+                    <form id="instrument-form">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="reg-id">Instrument ID / Serial Number *</label>
+                                <input type="text" id="reg-id" required placeholder="e.g., INS-1007">
+                            </div>
+                            <div class="form-group">
+                                <label for="reg-name">Instrument Name *</label>
+                                <input type="text" id="reg-name" required placeholder="e.g., Digital Multimeter Pro">
+                            </div>
+                            <div class="form-group">
+                                <label for="reg-type">Instrument Type *</label>
+                                <select id="reg-type" required>
+                                    <option value="">Select Category</option>
+                                    <option value="Weighing & Mass">Weighing & Mass</option>
+                                    <option value="Pressure Gauge">Pressure Gauge</option>
+                                    <option value="Temperature Sensor">Temperature Sensor</option>
+                                    <option value="Flow Meter">Flow Meter</option>
+                                    <option value="Dimensional Caliper">Dimensional Caliper</option>
+                                    <option value="Electrical Multimeter">Electrical Multimeter</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="reg-owner">Owner / Business Name *</label>
+                                <input type="text" id="reg-owner" required placeholder="e.g., TechVolt Engineering">
+                            </div>
+                            <div class="form-group">
+                                <label for="reg-location">Location / Facility</label>
+                                <input type="text" id="reg-location" placeholder="e.g., Lab Testing Facility B">
+                            </div>
+                            <div class="form-group">
+                                <label for="reg-status">Initial Verification Status *</label>
+                                <select id="reg-status" required>
+                                    <option value="Verified">Verified (Compliant)</option>
+                                    <option value="Pending" selected>Pending Inspection</option>
+                                    <option value="Expired">Expired</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="reg-calibration-date">Last Calibration Date</label>
+                                <input type="date" id="reg-calibration-date">
+                            </div>
+                            <div class="form-group">
+                                <label for="reg-due-date">Next Inspection Due Date *</label>
+                                <input type="date" id="reg-due-date" required>
+                            </div>
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="reg-notes">Technical Specifications / Notes</label>
+                            <textarea id="reg-notes" rows="3"
+                                placeholder="Enter accuracy tolerance, model number, or calibration lab notes..."></textarea>
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-outline"
+                                onclick="switchSection('registry-section')">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Save & Register Instrument</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <!-- SECTION 4: VERIFY INSTRUMENT -->
+            <section id="verify-section" class="content-section">
+                <div class="section-header">
+                    <div>
+                        <h1>Verify Instrument Authenticity</h1>
+                        <p>Instant digital certificate verification via Instrument ID or QR Lookup.</p>
+                    </div>
+                </div>
+
+                <div class="verify-container">
+                    <div class="card search-card">
+                        <h3>Search Instrument for Verification</h3>
+                        <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 16px;">Enter the unique
+                            instrument serial or ID code to view verified status and audit certificates.</p>
+                        <div class="inline-search">
+                            <input type="text" id="verify-search-input" placeholder="Enter ID (e.g., INS-1001)...">
+                            <button class="btn btn-primary" type="button" id="verify-btn">Verify Now</button>
+                        </div>
+                        <div class="quick-chips">
+                            <span>Try IDs:</span>
+                            <button class="chip" type="button" onclick="quickSelectVerify('INS-1001')">INS-1001</button>
+                            <button class="chip" type="button" onclick="quickSelectVerify('INS-1002')">INS-1002</button>
+                            <button class="chip" type="button" onclick="quickSelectVerify('INS-1003')">INS-1003</button>
+                            <button class="chip" type="button" onclick="quickSelectVerify('INS-1004')">INS-1004</button>
+                        </div>
+                    </div>
+
+                    <!-- Verification Result Card -->
+                    <div id="verify-result-card" class="card verify-result-card hidden">
+                        <div class="verify-status-banner" id="banner-status">
+                            <div class="banner-icon" id="banner-icon">✓</div>
+                            <div>
+                                <h3 id="result-title">VERIFIED & COMPLIANT</h3>
+                                <p id="result-subtitle">Official METRIFY digital verification record</p>
+                            </div>
+                        </div>
+
+                        <div class="cert-details-grid">
+                            <div class="cert-item"><span class="c-label">Instrument ID</span><span class="c-val"
+                                    id="res-id">-</span></div>
+                            <div class="cert-item"><span class="c-label">Instrument Name</span><span class="c-val"
+                                    id="res-name">-</span></div>
+                            <div class="cert-item"><span class="c-label">Category / Type</span><span class="c-val"
+                                    id="res-type">-</span></div>
+                            <div class="cert-item"><span class="c-label">Registered Owner</span><span class="c-val"
+                                    id="res-owner">-</span></div>
+                            <div class="cert-item"><span class="c-label">Location</span><span class="c-val"
+                                    id="res-location">-</span></div>
+                            <div class="cert-item"><span class="c-label">Calibration Due</span><span class="c-val"
+                                    id="res-due">-</span></div>
+                        </div>
+
+                        <div class="qr-placeholder-box">
+                            <div class="qr-box-icon">📱</div>
+                            <div class="qr-box-text">
+                                <strong>QR Verification URL Ready</strong>
+                                <p id="qr-url-text">https://metrify.demo/verify?id=INS-1001</p>
+                                <small>Scan with any device camera to validate this certificate instantly (Prototype
+                                    simulation).</small>
+                            </div>
+                        </div>
+
+                        <div class="disclaimer-note">
+                            <p><strong>Disclaimer:</strong> Academic prototype only — not an official government
+                                certification service.</p>
+                        </div>
+                    </div>
+
+                    <!-- Not Found Card -->
+                    <div id="verify-not-found" class="card verify-result-card hidden">
+                        <div class="verify-status-banner error">
+                            <div class="banner-icon">✕</div>
+                            <div>
+                                <h3>INSTRUMENT NOT FOUND</h3>
+                                <p>No registered record matches this ID in the METRIFY database.</p>
+                            </div>
+                        </div>
+                        <p style="margin-top: 15px; color: var(--text-secondary);">Please verify the ID or register the
+                            instrument in the registry.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 5: INSPECTION MANAGEMENT -->
+            <section id="inspection-section" class="content-section">
+                <div class="section-header">
+                    <div>
+                        <h1>Inspection Management & History</h1>
+                        <p>Log audit outcomes, calibration checks, and inspector notes.</p>
+                    </div>
+                </div>
+
+                <div class="inspection-layout">
+                    <div class="card">
+                        <h3>Log New Inspection</h3>
+                        <form id="inspection-form" style="margin-top: 15px;">
+                            <div class="form-group">
+                                <label for="insp-instrument">Select Instrument *</label>
+                                <select id="insp-instrument" required>
+                                    <option value="">Choose instrument...</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="insp-result">Inspection Outcome *</label>
+                                <select id="insp-result" required>
+                                    <option value="Passed">Passed (Certified Compliant)</option>
+                                    <option value="Conditional">Conditional Pass (Adjustment Needed)</option>
+                                    <option value="Failed">Failed (Out of Tolerance)</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="insp-date">Inspection Date *</label>
+                                <input type="date" id="insp-date" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="insp-inspector">Inspector Name / ID *</label>
+                                <input type="text" id="insp-inspector" required
+                                    placeholder="e.g., Officer R. Sharma (MET-889)">
+                            </div>
+                            <div class="form-group">
+                                <label for="insp-remarks">Audit Remarks & Measurements</label>
+                                <textarea id="insp-remarks" rows="3"
+                                    placeholder="Enter error drift, temperature conditions, or calibration standards used..."></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary" style="width: 100%;">Record Inspection &
+                                Update Status</button>
+                        </form>
+                    </div>
+
+                    <div class="card">
+                        <h3>Inspection History Logs</h3>
+                        <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 15px;">Chronological
+                            record of all past audits and calibration reviews.</p>
+                        <div class="table-responsive">
+                            <table class="data-table" id="inspection-history-table">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Instrument</th>
+                                        <th>Inspector</th>
+                                        <th>Outcome</th>
+                                        <th>Remarks</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 6: ABOUT METRIFY -->
+            <section id="about-section" class="content-section">
+                <div class="section-header">
+                    <div>
+                        <h1>About METRIFY</h1>
+                        <p>Smart Digital Verification Platform for Measuring Instruments.</p>
+                    </div>
+                </div>
+
+                <div class="card max-w-800 about-card">
+                    <h3>Project Vision & Overview</h3>
+                    <p>METRIFY is developed as a college engineering project to modernize metrology compliance and
+                        measuring instrument tracking for industries, calibration laboratories, and regulatory bodies.
+                        By transitioning from paper certificates to secure digital records with QR traceability, METRIFY
+                        ensures precision, accountability, and real-time audit readiness.</p>
+
+                    <h3 style="margin-top: 24px;">Core Modules & Features</h3>
+                    <ul class="feature-list">
+                        <li><strong>Instrument Registry:</strong> Centralized database tracking serial numbers,
+                            categories, owners, and calibration cycles.</li>
+                        <li><strong>Digital Verification:</strong> Instant ID lookup and QR-ready verification ensuring
+                            validity against calibration standards.</li>
+                        <li><strong>Inspection Management:</strong> End-to-end audit logging, inspector sign-offs, and
+                            automated status updates.</li>
+                        <li><strong>Role-Based Dashboard:</strong> Real-time statistics on active, verified, pending,
+                            and expired instruments with due-date alert monitoring.</li>
+                    </ul>
+
+                    <div class="notice-box" style="margin-top: 24px;">
+                        <div class="notice-icon">🎓</div>
+                        <div>
+                            <h4>Academic Disclaimer</h4>
+                            <p><strong>Academic prototype only — not an official government certification
+                                    service.</strong> Developed for college project evaluation and presentation.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- DUE ALERTS MODAL -->
+    <div id="alerts-modal" class="modal-overlay hidden">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>⚠️ Calibration Due & Overdue Alerts</h3>
+                <button class="icon-btn" type="button" onclick="closeAlertsModal()">✕</button>
+            </div>
+            <div class="modal-body">
+                <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 16px;">Instruments listed below
+                    have calibration next due dates within the next 7 days or are currently overdue/expired.</p>
+                <div class="table-responsive">
+                    <table class="data-table" id="alerts-modal-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Instrument Name</th>
+                                <th>Owner</th>
+                                <th>Next Due Date</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" type="button" onclick="closeAlertsModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
